@@ -685,13 +685,17 @@ class iFRIEND{
 		
 		switch (optionSort){
 			case 1 :sortName();break;
-			//case 2 :sortSalary();break;
-			//case 3 :sortBirthDay();break;
+			case 2 : sortSalary(); break;
+            case 3 : sortBirthDay(); break;
+
 			default:
+
 			System.out.println("\tInvalid Input...");
 			try{Thread.sleep(200);}catch(Exception e){}
+
 			clearConsole();
 			main(null);
+			
 			break;
 		}
 			
