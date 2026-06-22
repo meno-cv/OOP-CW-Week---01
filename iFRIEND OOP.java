@@ -370,7 +370,7 @@ class iFRIEND{
 			int index=searchContacts(search);
 
 			displayContact(index);
-	//		System.out.println('\n');
+			System.out.println('\n');
 			
 			if(index==-1){
 				System.out.println("\t No results found...");
@@ -457,7 +457,7 @@ class iFRIEND{
 			System.out.println('\n');
 			
 			int index=searchContacts(search);
-		//	int temp=searchContacts(search);
+			int temp=searchContacts(search);
 
 			displayContact(index);
 			
@@ -504,8 +504,8 @@ class iFRIEND{
 				System.out.println();
 				
 				System.out.print("Input new name - ");
-				//String updateName = input.next();
-				//contacts.setName(updateName);
+				String updateName = input.next();
+				contacts[index].setName(updateName);
 				
 				contacts[index].setName(input.next());
 				System.out.println('\n');
@@ -550,8 +550,6 @@ class iFRIEND{
 				
 				if(!checkPhoneNumber(p_NO)){
 					contacts[index].setPhoneNumber(p_NO);
-				}else{
-				//	contacts[index].getPhoneNumber()=contacts[index].getPhoneNumber();
 				}
 				
 				System.out.println('\n');
@@ -665,6 +663,110 @@ class iFRIEND{
 			sortContacts();
 		}
 	}
+	
+	//sort SALARY & BIRTHDAY
+	
+	
+	public static void sortSalary(){
+	Scanner input=new Scanner(System.in);
+
+	for(int j=contacts.length-1; j>0; j--){
+		for(int i=0; i<j; i++){
+			if(contacts[i].getSalary() > contacts[i+1].getSalary()){
+				Contacts temp = contacts[i];
+				contacts[i] = contacts[i+1];
+				contacts[i+1] = temp;
+			}
+		}
+	}
+
+	System.out.println("+--------------------------------------------------------------------------------------------+");
+	System.out.printf("| %-13s | %-12s | %-15s | %-11s | %-8s | %-15s |%n","Contact ID","Name","Phone Number","Company","Salary","Birthday");
+	System.out.println("+--------------------------------------------------------------------------------------------+");
+
+	for(int i=0; i<contacts.length; i++){
+		System.out.printf("| %-13s | %-12s | %-15s | %-11s | %-8.2f | %-15s |%n",
+			contacts[i].getContactId(),
+			contacts[i].getName(),
+			contacts[i].getPhoneNumber(),
+			contacts[i].getCompanyName(),
+			contacts[i].getSalary(),
+			contacts[i].getBirthday());
+	}
+
+	System.out.println("+--------------------------------------------------------------------------------------------+");
+
+	System.out.println('\n');
+	System.out.print("Do you want to go Home Page (Y/N): ");
+	char main=input.next().charAt(0);
+	main=Character.toLowerCase(main);
+
+	if(main=='y'){
+		clearConsole();
+		main(null);
+	}else{
+		clearConsole();
+		sortContacts();
+	}
+}
+
+public static void sortBirthDay(){
+	Scanner input=new Scanner(System.in);
+
+	for(int j=contacts.length-1; j>0; j--){
+		for(int i=0; i<j; i++){
+
+			if(contacts[i].getBirthday().equals("")){
+				continue;
+			}
+
+			if(contacts[i+1].getBirthday().equals("")){
+				Contacts temp=contacts[i];
+				contacts[i]=contacts[i+1];
+				contacts[i+1]=temp;
+				continue;
+			}
+
+			LocalDate d1=LocalDate.parse(contacts[i].getBirthday());
+			LocalDate d2=LocalDate.parse(contacts[i+1].getBirthday());
+
+			if(d1.isAfter(d2)){
+				Contacts temp=contacts[i];
+				contacts[i]=contacts[i+1];
+				contacts[i+1]=temp;
+			}
+		}
+	}
+
+	System.out.println("+--------------------------------------------------------------------------------------------+");
+	System.out.printf("| %-13s | %-12s | %-15s | %-11s | %-8s | %-15s |%n","Contact ID","Name","Phone Number","Company","Salary","Birthday");
+	System.out.println("+--------------------------------------------------------------------------------------------+");
+
+	for(int i=0; i<contacts.length; i++){
+		System.out.printf("| %-13s | %-12s | %-15s | %-11s | %-8.2f | %-15s |%n",
+			contacts[i].getContactId(),
+			contacts[i].getName(),
+			contacts[i].getPhoneNumber(),
+			contacts[i].getCompanyName(),
+			contacts[i].getSalary(),
+			contacts[i].getBirthday());
+	}
+
+	System.out.println("+--------------------------------------------------------------------------------------------+");
+
+	System.out.println('\n');
+	System.out.print("Do you want to go Home Page (Y/N): ");
+	char main=input.next().charAt(0);
+	main=Character.toLowerCase(main);
+
+	if(main=='y'){
+		clearConsole();
+		main(null);
+	}else{
+		clearConsole();
+		sortContacts();
+	}
+}
 	
 	public static void sortContacts(){
 		Scanner input=new Scanner(System.in);
